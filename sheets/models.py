@@ -42,5 +42,6 @@ class Character(models.Model):
     def __str__(self):
         return self.name
 
-    def was_published_recently(self):
-        return self.created >= timezone.now() - datetime.timedelta(days=1)
+    def was_created_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.created <= now

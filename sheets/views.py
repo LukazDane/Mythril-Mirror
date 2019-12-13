@@ -1,16 +1,24 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Character
-from django.template import loader
+from django.urls import reverse
+from django.views import generic
+from django.utils import timezone
 
 
-def index(request):
-    recent_char_list = Character.objects.order_by('-created')
-    # template = loader.get_template('sheets/index.html')
-    context = {'recent_char_list': recent_char_list, }
-    # return HttpResponse(template.render(context, request))
-    return render(request, 'sheets/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'sheets/index.html'
+    context_object_name = 'recent_char_list'
+
+    def get_queryset(self):
+        return Character.objects.filter(created__lte=timezone.now()).order_by('-created')
 
 
 def detail(request, character_id):
-    return HttpResponse("You're looking at character: %s." % character_id)
+    character = get_object_or_404(Character, pk=character_id)
+    return render(request, 'sheets/detail.html', {'character': character})
+
+
+class DetailView(generic.DetailView):
+    model = Character
+    template_name = 'sheets/detail.html'

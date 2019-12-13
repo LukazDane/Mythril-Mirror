@@ -1,9 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'sheets/style.css' %}">
+
 {% if recent_char_list %}
 <ul>
     {% for character in recent_char_list %}
-    <li><a href="/sheets/{{ character.id }}/">{{ character.name }}</a></li>
+    <li><a href="{% url 'sheets:detail' character.id %}">{{ character.name }}</a></li>
     {% endfor %}
 </ul>
 {% else %}
 <p>No sheets are available.</p>
 {% endif %}
+{% endblock %}
