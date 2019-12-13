@@ -10,12 +10,13 @@
   <link rel="shortcut icon"
     href="https://www.makeschool.com/assets/favicon_50x50-68cece25ffd4ff9e6545769d8a525b9ba532d432318c94e33fca9b96edb8cf6a.png"
     type="image/x-icon">
+  <link rel="stylesheet" href="/static/style.css">
   <title>Mythril Sheets</title>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'sheets:index' %}"><i class="fas fa-fw fa-book"></i> Mythril Mirror</a>
+    <a class="navbar-brand" href="{% url 'sheets:index' %}"><i class="far fa-tired"></i></i> Mythril Mirror</a>
     <form class="form-inline ml-auto">
       {% if user.is_authenticated %}
       <div class="text-white">Hello, <strong>{{user.username | title}}</strong>!</div>
