@@ -1,4 +1,7 @@
 from django.db import models
+import datetime
+from django.utils import timezone
+
 
 # Create your models here.
 
@@ -34,3 +37,10 @@ class Character(models.Model):
                             max_length=25, default='Human')
     main_class = models.CharField(
         choices=main_class_choices, max_length=25, default='Fighter')
+    created = models.DateTimeField('created')
+
+    def __str__(self):
+        return self.name
+
+    def was_published_recently(self):
+        return self.created >= timezone.now() - datetime.timedelta(days=1)
