@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_admin',
+    'rest_framework',
     'sheets.apps.SheetsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
